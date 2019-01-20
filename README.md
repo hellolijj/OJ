@@ -1,5 +1,6 @@
 # Online Judge 在线测试
 
-刷算法题记录
-
-hunt for job
+Target
+- 提高算法能力
+- 培养代码感觉
+- hunt for job
