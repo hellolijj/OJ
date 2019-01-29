@@ -34,3 +34,21 @@ int main(int argc, char const *argv[])
 
 // 总结：二分查找方法时间复杂度 o(logn)
 // mid 为下标，要么返回 mid 要么 mid = left + 1 or right + 1
+
+// 注意⚠️： 在二分查找方法中，left + right 有可能会超过 int 的上界，可食用 mid = left + (right-left)/2来代替
+
+// 查找第一次大于等于x的元素的位置
+int lower_search(int a[], int left, int right, int x) {
+
+	int mid;
+	while(left < right) {
+		mid = left + (right - left) / 2;
+		if(a[mid] >= x) {
+			right = mid;
+		} else {
+			left = mid + 1;
+		}
+	}
+
+	return left;
+}
