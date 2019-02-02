@@ -29,11 +29,15 @@ void print(Bign n) {
 	{
 		printf("%c", n.d[n.len-i-1] + '0');
 	}
+	
+	if(n.len <= 0) {
+		printf("0");
+	}
+	printf("\n");
 }
 
 // 两个大数相加
 Bign add(Bign a, Bign b) {
-	
 	Bign c;
 	int carry = 0; //进位
 	for (int i = 0; i < a.len || i < b.len; ++i)
@@ -53,6 +57,30 @@ Bign add(Bign a, Bign b) {
 	return c;
 }
 
+// 两个大数字相减去
+// 这里默认 a > b。 如果 a < b的话，则交换ab,对结果输出负值
+Bign sub(Bign a, Bign b) {
+
+	Bign c;
+	for(int i = 0; i < a.len || i < b.len; i++) {
+		if (a.d[i] < b.d[i])
+		{
+			a.d[i] += 10;
+			a.d[i+1] --;
+		}
+		c.d[i] = a.d[i] - b.d[i];
+		c.len++;
+	}
+
+	// 对最高位相减为0的特殊情况进行处理: c的长度减下来
+	while(c.d[c.len-1] == 0) {
+		c.len--;
+	}
+	// 对a-b=0这种情况，特殊处理
+	
+	return c;
+}
+
 int main(int argc, char const *argv[])
 {
 	char a[1000], b[1000];
@@ -60,5 +88,6 @@ int main(int argc, char const *argv[])
 	Bign big_a = change(a);
 	Bign big_b = change(b);
 	print(add(big_a, big_b));
+	print(sub(big_a, big_b));
 	return 0;
 }
