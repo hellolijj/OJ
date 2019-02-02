@@ -57,9 +57,39 @@ Bign add(Bign a, Bign b) {
 	return c;
 }
 
+// 比较两个大数， a > = < b 分别返回 1， 0， -1
+int compare(Bign a, Bign b) {
+
+	if (a.len > b.len) {
+		return 1;
+	} else if(a.len < b.len) {
+		return -1;
+	} else {
+		for (int i = 0; i < a.len; ++i)
+		{
+			if (a.d[a.len-1] > b.d[b.len-1]) {
+				return 1;
+			} else if(a.d[a.len-1] > b.d[b.len-1]) {
+				return -1;
+			}
+		}
+		return 0;
+	}
+}
+
 // 两个大数字相减去
 // 这里默认 a > b。 如果 a < b的话，则交换ab,对结果输出负值
 Bign sub(Bign a, Bign b) {
+
+	if(compare(a, b) < 0) {
+		Bign temp;
+		// 结构体内容的交换
+		/*
+		temp = a;
+		a = b;
+		b = temp;
+		*/
+	}
 
 	Bign c;
 	for(int i = 0; i < a.len || i < b.len; i++) {
@@ -89,5 +119,6 @@ int main(int argc, char const *argv[])
 	Bign big_b = change(b);
 	print(add(big_a, big_b));
 	print(sub(big_a, big_b));
+	printf("%d\n", compare(big_a, big_b));
 	return 0;
 }
