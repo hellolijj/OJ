@@ -6,6 +6,7 @@
 #include <queue>
 #include <stack>
 #include <map>
+#include <iostream>
 
 using namespace std;
 
@@ -20,6 +21,8 @@ queue<Node> q;  // 后缀表达式队列
 stack<Node> s;  // 操作符栈
 map<char, int> op;    // 操作符
 
+string str;
+
 
 // 设置操作符的优先级
 void init_op()
@@ -33,19 +36,22 @@ void init_op()
 void change()
 { 
 	// string str = "3+4";
-	string str = "3+4*5-6/2+3+4+5-4";
+	// string str = "3+4*5-6/2+3+4+5-4";
 
 	Node temp;
+	int t = 0;   // t 用于处理 (string)123  => int(123)
 	for (int i = 0; i < str.length(); ++i)
 	{
 		// 如果是数字
 		if (str[i] >= '0' && str[i] <= '9') {
-            temp.num = str[i] - '0';
+            temp.num = t * 10 + str[i] - '0';
             temp.flag = true;
 
             // 将数字压入队列
             q.push(temp);
+			t = temp.num;
         } else {
+        	
 
         	// 如果当前操作符op优先级 <= 队列首操作符，
         	// 则将队首操作符压出并排入到后缀表达式中
@@ -58,6 +64,7 @@ void change()
         	temp.op = str[i];
         	temp.flag = false;
         	s.push(temp);
+        	t = 0;
         }    
 	}
 
@@ -120,9 +127,26 @@ int main(int argc, char const *argv[])
 {
 	
     init_op();
-    change();
+	// getline 输入法，获取输入的一行内容
+	while(getline(cin, str), str != "0") {
+		
+		// 消除没有用的空格
+		for(string::iterator it = str.begin(); it != str.end(); it++) {
+			if(*it == ' ') {
+				str.erase(it);
+			}
+		}
+
+		// 初始化栈
+		while(!s.empty()) s.pop();
+		// 初始化队列
+		while(!q.empty()) q.pop();
+		change();	
+		printf("%d\n", cal());
+	}
+    
     // print();
-    printf("%d", cal());
+    
 
 	return 0;
 }
@@ -156,3 +180,27 @@ eg: 2 1 + 3 *
 3、如果遇到操作符，则弹出两个操作数。先弹出的位第二操作数，后弹出的位第一操作数。与运算符进行计算
 将计算结果再压入到栈中。
 */
+
+/*
+如何处理字符串中的123 转为 123？
+
+设置一个int temp 变量？
+
+int t = 0;
+for() {
+	if(is_num) {
+		n = t * 10 + s[i];
+	} else {
+		t = 0;
+	}
+}
+
+
+*/
+
+/*
+如何获取 每一行string
+
+*/
+
+
