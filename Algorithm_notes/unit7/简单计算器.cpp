@@ -87,12 +87,42 @@ void print() {
 
 }
 
+// 计算后缀表达式
+int cal() {
+
+	Node temp, cur;
+	while(!q.empty()) {
+		cur = q.front();
+		q.pop();
+
+		// 如果是数字
+		if (cur.flag){
+			s.push(cur);
+		} else {
+			Node num2 = s.top(); s.pop();
+			Node num1 = s.top(); s.pop();
+			temp.flag = true;
+
+			switch(cur.op) {
+				case '+': temp.num = num1.num + num2.num; break;
+				case '-': temp.num = num1.num - num2.num; break;
+				case '*': temp.num = num1.num * num2.num; break;
+				case '/': temp.num = num1.num / num2.num; break;
+			}
+			s.push(temp);
+		}
+	}
+
+	return s.top().num;
+}
+
 int main(int argc, char const *argv[])
 {
 	
     init_op();
     change();
-    print();
+    // print();
+    printf("%d", cal());
 
 	return 0;
 }
@@ -117,4 +147,12 @@ eg: 2 1 + 3 *
 	直到该操作符高于栈顶操作符。
 	4）如果将该操作符op压入栈中。
 不断重复以上过程，直到遍历完所有的中缀表达式。然后将操作符栈的符号压入到后缀表达式中。
+*/
+
+/*
+后缀表达式的计算
+1、将后缀表达式队列从左至右依次压入到栈中
+2、如果遇到操作数，则将数字压入到栈中。
+3、如果遇到操作符，则弹出两个操作数。先弹出的位第二操作数，后弹出的位第一操作数。与运算符进行计算
+将计算结果再压入到栈中。
 */
