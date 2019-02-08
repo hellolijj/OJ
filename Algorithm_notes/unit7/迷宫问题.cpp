@@ -98,3 +98,7 @@ int main(int argc, char const *argv[])
 	printf("%d\n", BFS());
 	return 0;
 }
+
+// 总结：关于inq[][] 数组表示元素是否进入队列，而不是是否已经访问。
+// 因为如果是表示访问的话，那么存在一个节点多次进入队列中
+// BFS 表示每个节点入队列一次
