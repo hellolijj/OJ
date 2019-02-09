@@ -16,7 +16,7 @@ struct Node
 	Node* rchild;
 };
 
-Node* create(int post_l, int post_r, int in_l, int in_r) {
+Node* create_by_post_and_in(int post_l, int post_r, int in_l, int in_r) {
 	if (post_l > post_r)
 	{
 		return NULL;
@@ -36,9 +36,32 @@ Node* create(int post_l, int post_r, int in_l, int in_r) {
 	}
 
 	int num_left = k - in_l;
-	root->lchild = create(post_l, post_l+num_left-1, in_l, k-1);
-	root->rchild = create(post_l+num_left, post_r-1, k+1, in_r);
+	root->lchild = create_by_post_and_in(post_l, post_l+num_left-1, in_l, k-1);
+	root->rchild = create_by_post_and_in(post_l+num_left, post_r-1, k+1, in_r);
 
+	return root;
+}
+
+Node* create_by_pre_and_in(int pre_l, int pre_r, int in_l, int in_r) {
+	if (pre_l > pre_r)
+	{
+		return NULL;
+	}
+	Node* root = new Node;
+	root->data = pre[pre_l];
+
+	int k;
+	for (k = in_l; k <= in_r; k++)
+	{
+		if (in[k] == pre[pre_l])
+		{
+			break;
+		}
+	}
+
+	int num_left = k - in_l;
+	root->lchild = create_by_pre_and_in(pre_l+1, pre_l+num_left, in_l, k-1);
+	root->rchild = create_by_pre_and_in(pre_l+num_left+1, pre_r, k+1, in_r);
 	return root;
 }
 
@@ -59,26 +82,99 @@ void BFS(Node* root) {
 			q.push(top->rchild);
 		}
 	}
+	printf("\n");
+}
+
+// 前序遍历
+void preorder(Node* root) {
+	if (root == NULL)
+	{
+		return;
+	}
+	printf("%d ", root->data);
+	if (root->lchild != NULL)
+	{
+		preorder(root->lchild);	
+	}
+	if (root->rchild != NULL)
+	{
+		preorder(root->rchild);	
+	}
+	
+}
+
+// 中序遍历
+void inorder(Node* root) {
+	if (root == NULL)
+	{
+		return;
+	}
+	if (root->lchild != NULL)
+	{
+		inorder(root->lchild);	
+	}
+	printf("%d ", root->data);
+	if (root->rchild != NULL)
+	{
+		inorder(root->rchild);	
+	}
+	
+}
+
+// 后序遍历
+void postorder(Node* root) {
+	if (root == NULL)
+	{
+		return;
+	}
+	if (root->lchild != NULL)
+	{
+		postorder(root->lchild);	
+	}
+	if (root->rchild != NULL)
+	{
+		postorder(root->rchild);	
+	}
+	printf("%d ", root->data);
+	
 }
 
 int main(int argc, char const *argv[])
 {
 	scanf("%d", &n);
+	// for (int i = 0; i < n; i++)
+	// {
+	// 	scanf("%d", &post[i]);
+	// }
+	// for (int i = 0; i < n; i++)
+	// {
+	// 	scanf("%d", &in[i]);
+	// }
+	// Node *root = create_by_post_and_in(0, n-1, 0, n-1);
 	for (int i = 0; i < n; i++)
 	{
-		scanf("%d", &post[i]);
+		scanf("%d", &pre[i]);
 	}
 	for (int i = 0; i < n; i++)
 	{
 		scanf("%d", &in[i]);
 	}
-    
-	Node *root = create(0, n-1, 0, n-1);
+	Node *root = create_by_pre_and_in(0, n-1, 0, n-1);
 
 	BFS(root);
+	preorder(root);
+	printf("\n");
+
+	inorder(root);
+	printf("\n");
+
+	postorder(root);
+	printf("\n");
     
 	return 0;
 }
 
 // 程序不能程序运行，是因为递归的层次太多吗？
 // 果然是的，在本地电脑递归的层级不能太多。但是在线编译就可以通过。
+
+// todo 如何通过层次遍历和中序遍历创建一个二叉树
