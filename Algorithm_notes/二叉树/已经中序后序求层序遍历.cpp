@@ -1,6 +1,9 @@
 // 题意：已经二叉树的 后序遍历、中序遍历，求二叉树的层序遍历
 
 #include <cstdio>
+#include <queue>
+
+using namespace std;
 
 int n;      //节点个数
 const int N = 31;
@@ -24,7 +27,7 @@ Node* create(int post_l, int post_r, int in_l, int in_r) {
 
 	// 在中序序列中查找根节点k, k表示中序序列中根节点的下标
 	int k;
-	for (int k = in_l; k <= in_r; ++k)
+	for (k = in_l; k <= in_r; k++)
 	{
 		if (in[k] == post[post_r])
 		{
@@ -39,20 +42,41 @@ Node* create(int post_l, int post_r, int in_l, int in_r) {
 	return root;
 }
 
+// 层次遍历 bfs
+void BFS(Node* root) {
+	queue<Node*> q;
+	q.push(root);
+	while(!q.empty()) {
+		Node * top = q.front();
+		q.pop();
+		printf("%d ", top->data);
+		if (top->lchild != NULL)
+		{
+			q.push(top->lchild);
+		}
+		if (top->rchild != NULL)
+		{
+			q.push(top->rchild);
+		}
+	}
+}
+
 int main(int argc, char const *argv[])
 {
 	scanf("%d", &n);
-	for (int i = 0; i < n; ++i)
+	for (int i = 0; i < n; i++)
 	{
 		scanf("%d", &post[i]);
 	}
-	for (int i = 0; i < n; ++i)
+	for (int i = 0; i < n; i++)
 	{
 		scanf("%d", &in[i]);
 	}
-    printf("123o\n");
+    
 	Node *root = create(0, n-1, 0, n-1);
-    printf("hello\n");
+
+	BFS(root);
+    
 	return 0;
 }
 
