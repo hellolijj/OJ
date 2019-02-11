@@ -12,6 +12,7 @@ const int INF = 1000000000;
 int n, m, s, G[N][N]; // n个节点、m条边，s为起点， G为有向图
 
 int d[N];     // 记录节点到所有节点的 最短距离
+int pre[N];      // 记
 
 bool vis[N] = {false};    // 记录节点是否被访问
 
@@ -19,6 +20,7 @@ void dijkstra(int s) {
 
 	fill(d, d + n, INF);
 	d[s] = 0;
+	for(int i = 0; i < n; i++) pre[i] = i;
 
 	for (int i = 0; i < n; ++i)
 	{
@@ -42,9 +44,21 @@ void dijkstra(int s) {
 			if (vis[v] == false && G[u][v] != INF && G[u][v] + d[u] < d[v])
 			{
 				d[v] = G[u][v] + d[u];
+				pre[v] = u;
 			}
 		}
 	}
+}
+
+void dfs(int u, int v) {
+	if(u == v) {
+		printf("%d", u);
+		return;
+	} 
+
+	dfs(u, pre[v]);
+	printf("%d", v);
+
 }
 
 int main(int argc, char const *argv[])
@@ -63,10 +77,11 @@ int main(int argc, char const *argv[])
 
 	for (int i = 0; i < n; ++i)
 	{
-		printf("%d ", d[i]);
+		printf("%d到%d的最短路径为:",s, i);
+		dfs(s, i);
+		printf(" 长度是%d", d[i]);
+		printf("\n");
 	}
-
-	printf("\n");
 	return 0;
 }
 
