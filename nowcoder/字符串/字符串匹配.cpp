@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <cstring>
 #include <queue>
+#include <string>
 
 using namespace std;
 
@@ -12,6 +13,8 @@ using namespace std;
 
 思路二：
 使用string 的特性做
+string.find(" ", ops);
+string.replace(ops, len, "%20")
 
 思路三：使用两次遍历
 如果发现 ' '
@@ -41,9 +44,16 @@ public:
 	}
 
     void replaceSpace_2(char* str, int length) {
-        // string s(str);
-        // int i = s.find(' ', i);
+        string s(str);
+        int next_find = 0;
+
+        while(s.find(" ", next_find) != -1) {
+            next_find = s.find(" ", next_find);
+            s.replace(s.find(" ", next_find), 1, "%20");
+        }
         
+        // string ==> char *   s.c_str()
+        strcpy(str, s.c_str());
     }
 
     void replaceSpace_3(char* str, int length) {
@@ -68,7 +78,7 @@ int main() {
     int length = strlen(s);
     
     class Solution Solu;
-    Solu.replaceSpace_3(s, length);
+    Solu.replaceSpace_2(s, length);
 
     printf("%s\n", s);
     
