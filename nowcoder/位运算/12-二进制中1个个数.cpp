@@ -2,6 +2,8 @@
 /*
 题目描述
 输入一个整数，输出该数二进制表示中1的个数。其中负数用补码表示。
+此题目考查位运算的技巧。有必收集题目考查位运算的题目
+
 */
 class Solution {
 public:
@@ -9,10 +11,8 @@ public:
 
          int res = 0;
          while(n != 0) {
-            if(n % 2 == 1) {
-                res++;
-            }
-            n = n / 2;
+            res++;
+            n = n & (n-1);
          }
          return res;
          
@@ -21,7 +21,7 @@ public:
 
 int main() {
     class Solution solu;
-    printf("%d\n", solu.NumberOf1(3));
+    printf("%d\n", solu.NumberOf1(-5));
     return 0;
 }
 
@@ -43,3 +43,5 @@ int main() {
 补码： 11111011
 所以 -5的编码表示为 11111011
 */
+
+
