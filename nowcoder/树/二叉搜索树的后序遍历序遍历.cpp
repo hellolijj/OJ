@@ -26,32 +26,47 @@ using namespace std;
 
 class Solution {
 public:
-    bool VerifySquenceOfBST(vector<int> sequence) {
-        int length = sequence.size();
-        if(length == 0 || length == 1) {
+    bool VerifySquenceOfBST(vector<int>& sequence) {
+        return isSquenceOfBST(sequence, 0, sequence.size()-1);
+    }
+
+    bool isSquenceOfBST(vector<int> sequence,int begin,int end) {
+
+        if(sequence.empty() || begin > end) {
+            return false;
+        }
+        int length = end-begin ;
+        if(length == 1) {
             return true;
         }
-        
 
-        int root = sequence[length-1];
-        int k=0;
-        while(k < length && sequence[k] < root) {
+        int root = sequence[end];
+        int k=begin;
+        while(k <= end - 1  && sequence[k] < root) {
             k++;
         }
         
         // 此时sequence[k] 是第一个 >= root的值， 随后k+1 ~ length-2 值都 > k则返回true
-        while(k < length-1) {
+        while(k <= end - 1) {
             if(sequence[k] >= root) {
                 k++;
                 continue;
             }
             return false;
         }
-        
-        vector<int>left(sequence.begin(), sequence.begin()+k-1);
-        vector<int>right(sequence.begin()+k, sequence.begin()+length-1);
 
-        return VerifySquenceOfBST(left) && VerifySquenceOfBST(right);
+        // 递归的条件  begin < k < end
+        // 由于上部分程序没有一个明确的返回值，所以要给函数一个初始化的值。
+        bool left = true;
+        if(k > begin) {
+            left = isSquenceOfBST(sequence, begin, k-1);
+        }
+        bool right = true;
+        if(k < end) {
+            right = isSquenceOfBST(sequence, k, end-1);
+        }
+
+        return left && right;
     }
 };
 
@@ -69,3 +84,11 @@ int main() {
         printf("no\n");
     }
 }
+
+/*
+这个题目应该属于数组序列部分
+
+递归排序中，vector 不分割，变动的只是下标的变化。
+
+
+*/
