@@ -37,3 +37,5 @@ int main() {
  
   return 0;  
 }
+
+> 在面向对象的类中，使用sort排序方法 sort(vi.begin(), bi.end(), cpm) 这个cmp 需要是一个static方法
