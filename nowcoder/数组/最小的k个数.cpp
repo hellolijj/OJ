@@ -43,7 +43,26 @@ void quick_sort(vector<int> &vi, int left, int right) {
         quick_sort(vi, left, ops-1);
         quick_sort(vi, ops+1, right);
     }
+}
 
+int top_k(vector<int> &vi, int left, int right, int k) {
+    if(k < 0 || k > vi.size() || vi.empty()) {
+        return -1;
+    } 
+
+    if (left == right) {
+        return vi[left];
+    }
+    
+    int ops = partition(vi, left, right);
+    if(ops+1 == k) {
+        return vi[ops];
+    } else if(ops+1 > k) {
+        return top_k(vi, left, ops-1, k);
+    } else {
+        return top_k(vi, ops+1, right, k-ops-1);
+    }
+    
 }
 int main() {
     int a[6] = {4,5,7,6,1,2};
@@ -52,11 +71,13 @@ int main() {
         v[i] = a[i];
     }
 
-    quick_sort(v, 0, 5);
+    // quick_sort(v, 0, 5);
 
-    for(int i = 0; i < v.size(); i++) {
-        printf("%d ", v[i]);
-    }
+    printf("第%d小的数%d\n", 3, top_k(v, 0, 6, 3));
+
+    // for(int i = 0; i < v.size(); i++) {
+    //     printf("%d ", v[i]);
+    // }
 
     return 0;
 }
