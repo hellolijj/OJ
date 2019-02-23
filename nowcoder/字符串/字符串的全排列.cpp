@@ -40,11 +40,11 @@ public:
             return ;
         }
         for(int i = begin; str[i]!='\0';i++){
-            // if(i!=begin&&str[begin]==str[i])   // 存在相同的情况
-            //     continue;
-            swap(str[begin],str[i]);
+            if(i!=begin&&str[begin]==str[i])   // 存在相同的情况， 如abcc
+                continue;
+            swap(str[begin],str[i+1]);
             Permutation1(str,begin+1);
-            swap(str[begin],str[i]);
+            swap(str[begin],str[i+1]);
         }
     }
 };
