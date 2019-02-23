@@ -21,3 +21,11 @@ string s("122335245");
 vector<char> v(s.size());
 copy(s.begin(),s.end(),v.begin());
 ```
+
+# int => string
+
+```
+int a = 123;
+string s = to_string(a);
+```
+> to_string()函数可以将int转为string
