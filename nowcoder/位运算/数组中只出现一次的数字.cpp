@@ -28,6 +28,8 @@ public:
             flag = flag ^ data[i];
         }
         int flag_first_1 = get_first_1(flag);
+
+        // 分组
         vector<int> v1;
         vector<int> v2;
         for(int i = 0; i < data.size(); i++) {
