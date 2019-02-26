@@ -30,6 +30,14 @@ public:
         res[i] = '\0';
         return res;
     }
+
+    string LeftRotateString1(string str, int n) {
+        int len = str.length();
+        if(len == 0) return "";
+        n = n % len;
+        str += str;
+        return str.substr(n, len);
+    }
 };
 
 int main() {
@@ -41,4 +49,6 @@ int main() {
 /*
 
 注意边界条件
+
+方法二：简介明了
 */
