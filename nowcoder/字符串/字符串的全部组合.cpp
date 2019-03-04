@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -41,6 +42,8 @@ public:
             return;
         }
         
+        
+
         // begin这个字符放进去
         r.push_back(s[begin]);
         Permutation1(s, begin+1, r);
@@ -48,14 +51,23 @@ public:
         // begin这个字符不放进去
         r.pop_back();
         Permutation1(s, begin+1, r);
+
+        
     }
 };
 
 int main() {
     class Solution solu;
     solu.Permutation("abc");
+    sort(solu.res.begin(), solu.res.end());
     for(int i = 0; i < solu.res.size(); i++) {
         cout << solu.res[i] << endl;
     } 
     return 0;
 }
+
+/*
+总结：好像一定要这种顺序，
+先将这个元素压入到 vector<char> 里
+再将这个元素pop_back出来
+*/

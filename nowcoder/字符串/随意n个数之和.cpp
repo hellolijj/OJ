@@ -16,9 +16,8 @@ using namespace std;
 
 
 class Solution {
-
 public:
-    vector<string> res;
+    vector<string> list1;
     void find_factor(int sum,int n)
     {
         //递归出口
