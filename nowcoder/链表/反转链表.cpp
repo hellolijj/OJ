@@ -79,6 +79,10 @@ public:
     }
 };
 
+/*
+使用递归的反转链表结尾部分有些不太会掌握
+*/
+
 
 Node* create(int a[], int length) {
 

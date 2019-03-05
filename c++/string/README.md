@@ -11,6 +11,7 @@ vector<char> data;
 std::string res;
 res.insert(res.begin(), data->begin(), data->end());
 
+// vector<cahr> => string
 string str;
 vector <char> ta = {‘a’, 'b', 'c'};
 str.clear();
@@ -20,6 +21,8 @@ str.assign(ta.begin(),ta.end());
 string s("122335245");
 vector<char> v(s.size());
 copy(s.begin(),s.end(),v.begin());
+
+// 也可以直接 str[i]表示
 ```
 
 # int => string
