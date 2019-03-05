@@ -86,3 +86,30 @@ int main() {
     return 0;
 }
 ```
+
+## string 的 erase 操作
+
+删除某一个点的操作
+str.erase(str.begin()+i)
+删除一个子字符串
+str.erase(str.begin(), str.begin()+2)
+删除的第二个用法
+str.erase(pos, length);
+
+## string 的 insert 操作
+str.insert(pos, s)
+
+## string 函数汇总
+str.length()
+str.size()
+str.insert(ops, string)
+str.insert(it, it2, it3)  // it 是 str 的指针， it2 it3 是另一个想插入的指针
+str.erase(ops, length)
+str.erase(it, it2)
+str.erase(ops)  //这个默认删除ops后面的所有
+str.clear()
+str.substr(ops, len)  返回ops开始 长度为len的字符串
+str.find(str2)  // 返回str2在str第一次出现的下表指针 不存在就返回-1
+str.find(str, ops) // 从ops开始找
+str.replase(ops, len, str2) 从ops开始长度为len的字符串替换为 str2
+str.replase(it1, it2, str2) 从指针it1 it2 替换为 str字符串

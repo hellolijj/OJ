@@ -43,3 +43,11 @@ mp.insert(make_pair("lijj", 4));
 mp.insert(pair<string, int>("lijj", 4));
 
 ```
+
+## map 函数汇总
+
+mp.find(key) 返回的是一个it类型
+通过 it->first, it->second 来访问map的key 和 value
+mp.erase(it);
+mp.erase(it_first, it_last);
+mp.size();

@@ -49,3 +49,12 @@ vector<int> b;
 b.swap(a);
 ```
 > swap不仅是浅拷贝，而且之间的vector<int> a也失去内容了
+
+## vector函数汇总
+v.push_back(n);
+v.pop_back();
+v.size();
+v.clear();
+v.insert(it, x);
+vi.erase(it);
+vi.erase(it_begin, it_end);
