@@ -27,3 +27,47 @@
 输出 
 136
 */
+
+#include <cstdio>
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+// m行 n 列
+
+int apple[51][51];
+
+int dp(int m, int n) {
+	if (m == 0 && n == 0) {
+		return apple[0][0];
+	}
+	else if (m == 0) {
+		return apple[m][n] + dp(m, n - 1);
+	}
+	else if (n == 0) {
+		return apple[m][n] + dp(m-1, n);
+	}
+	else {
+		return max(apple[m][n] + dp(m, n - 1), apple[m][n] + dp(m - 1, n));
+	}
+}
+
+
+int main() {
+	
+    int m, n; 
+    cin >> m >> n;
+
+	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			int tmp;
+            cin >> tmp;
+			apple[i][j] = tmp;
+		}
+	}
+
+	cout << dp(1, 3);
+}
+
+// 思路：使用动态规划，找到动态规划的出口和状态方程
