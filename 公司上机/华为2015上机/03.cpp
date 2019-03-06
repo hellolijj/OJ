@@ -23,7 +23,9 @@
 // ex:阶乘数，因为符号有三种可能，加号，减号，或者没有，如果没有，那么ex就用于计算当前值
 #include<iostream>
 #include<cmath>
+
 using namespace std;
+
 int dp(int before, int des, int res,int ex) {
 	if (before == 0) {
 		if (des == res) {
@@ -40,5 +42,9 @@ int dp(int before, int des, int res,int ex) {
 int main(){
 	int n; cin >> n;
 	cout << dp(8,9,n,1);
-
 }
+
+
+/*
+这个题目看不懂诶
+*/
