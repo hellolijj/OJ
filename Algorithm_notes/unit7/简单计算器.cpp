@@ -32,7 +32,7 @@ void init_op()
 }
 
 
-// 将中追表达式 转为 后缀表达式
+// 将中缀表达式 转为 后缀表达式
 void change()
 { 
 	// string str = "3+4";
@@ -51,8 +51,6 @@ void change()
             q.push(temp);
 			t = temp.num;
         } else {
-        	
-
         	// 如果当前操作符op优先级 <= 队列首操作符，
         	// 则将队首操作符压出并排入到后缀表达式中
         	while(!s.empty() && op[str[i]] <= op[s.top().op]) {
