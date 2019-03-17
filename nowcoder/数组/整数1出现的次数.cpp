@@ -12,3 +12,24 @@
 然后遍历
 时间复杂度o(nlgn)
 */
+
+#include <cstdio>
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    int cnt = 0;
+    for(int i = 0; i <= n; i++) {
+        string s = to_string(i);
+        for(int j = 0; j < s.length(); j++) {
+            if(s[j] == '1') {
+                cnt ++;
+            }
+        }
+    }
+    cout  << cnt << endl;
+}
