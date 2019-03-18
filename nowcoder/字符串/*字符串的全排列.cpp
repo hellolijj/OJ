@@ -42,16 +42,17 @@ public:
         for(int i = begin; str[i]!='\0';i++){
             if(i!=begin&&str[begin]==str[i])   // 存在相同的情况， 如abcc
                 continue;
-            swap(str[begin],str[i+1]);
+            swap(str[begin],str[i]);
             Permutation1(str,begin+1);
-            swap(str[begin],str[i+1]);
+            swap(str[begin],str[i]);
         }
     }
 };
 
 int main() {
     class Solution solu;
-    solu.Permutation("abcc");
+    solu.Permutation("abcdd");
+    cout << solu.result.size() << endl;
     for(int i = 0; i < solu.result.size(); i++) {
         cout << solu.result[i] << endl;
     } 

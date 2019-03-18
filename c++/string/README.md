@@ -113,3 +113,19 @@ str.find(str2)  // 返回str2在str第一次出现的下表指针 不存在就�
 str.find(str, ops) // 从ops开始找
 str.replase(ops, len, str2) 从ops开始长度为len的字符串替换为 str2
 str.replase(it1, it2, str2) 从指针it1 it2 替换为 str字符串
+
+
+## 整数与数字之间的相互转换
+
+1、数字 =》 string
+```
+int a = 123;
+string s = to_string(a);
+```
+
+2、string => int
+
+```
+#include "sstream"
+int temp = std::atoi(ip_str[i].c_str());
+```

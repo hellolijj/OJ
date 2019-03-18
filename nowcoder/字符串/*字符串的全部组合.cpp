@@ -14,8 +14,6 @@ using namespace std;
 第二是不把这个字符放到组合中去，接下来我们需要在剩下的n-1个字符中选择m个字符。
 */
 
-
-
 class Solution {
 
 public:
@@ -42,8 +40,6 @@ public:
             return;
         }
         
-        
-
         // begin这个字符放进去
         r.push_back(s[begin]);
         Permutation1(s, begin+1, r);
@@ -51,8 +47,6 @@ public:
         // begin这个字符不放进去
         r.pop_back();
         Permutation1(s, begin+1, r);
-
-        
     }
 };
 

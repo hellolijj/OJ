@@ -16,6 +16,8 @@ for(i = 0, j = 0; i < pushV.size(); i++) {
     }
 }
 return s.empty();
+
+思路总结：每一个元素的进栈，就想办法看看这个元素能不能出栈。
 */
 
 class Solution {
