@@ -22,6 +22,7 @@
 #include <cstdio>
 #include <algorithm>
 #include <string>
+#include <set>
 #include <map>
 
 using namespace std;
@@ -30,33 +31,35 @@ class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
         // 重复(某字符串出现在之前的字符串中)就切割，并重新计数字
-        if(s.length() <= 1) {
-            return s.length();
-        }
-
         map<char, int> mp;
-
-        int l = 1;
-        int max_length = 1;
-        mp[s[0]] = 1;
-        for(int i = 1; i < s.length(); i++) {
-            mp[s[i]]++;
-            if(mp[s[i]] == 1) {
-                l ++;
+        int i = 0, j = 0, ans = 0;
+        while(i < s.length() && j < s.length()) {
+            if(mp[s[j]] == 0) {
+                mp[s[j]] ++;
+                j++;
+                ans = max(ans, j - i);
             } else {
-                max_length = max(max_length, l);
-                l = 1;
-                mp.clear();
-                mp[s[i]] = 1;
+                mp[s[i]]--;
+                i++;
             }
         }
-        max_length = max(max_length, l);
-        return max_length;
+        return ans;
     }
 };
 
 int main() {
     class Solution solu;
-    printf("%d\n", solu.lengthOfLongestSubstring("dvdf"));
+    printf("%d\n", solu.lengthOfLongestSubstring("pwwkew"));
+
     return 0;
 }
+
+/*
+
+参考答案：
+https://leetcode-cn.com/articles/longest-substring-without-repeating-characters/
+
+思路：
+窗口滑动方法
+
+*/
